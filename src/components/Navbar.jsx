@@ -1,18 +1,38 @@
 import menu from "../assets/images/icon-menu.svg"
+import closeBtn from '../assets/images/icon-menu-close.svg'
+import { useState } from 'react'
 
 export const Navbar = () => {
+
+  const [menuClicked, setMenuClicked] = useState(true)
+
+  const handleClick = () => {
+    setMenuClicked(prevState => !prevState)
+  }
+
   return (
     <>
-        <ul className=" hidden sm:flex text-[18px] sm:w-[438px] sm:place-content-around sm:text-[16px] sm:items-center ">
-            
-            <li><a href="#">Home</a></li>
-            <li><a href="#">New</a></li>
-            <li><a href="#">Popular</a></li>
-            <li><a href="#">Trending</a></li>
-            <li><a href="#">Categories</a></li>
-        </ul>
-    
-    <img className="w-10 h-4 cursor-pointer sm:hidden" src={menu} alt="Menu"/>
+      <ul className={`${menuClicked ? 'hidden' : ''} absolute bg-white top-0 right-0 w-[256px] p-[24px] h-full text-[18px] sm:flex sm:items-center sm:w-[438px] sm:place-content-around sm:p-0 sm:h-auto sm:relative sm:text-[16px]`}>
+        <li className={`${menuClicked ? 'hidden' : ''} cursor-pointer sm:hidden  flex place-content-end`}>
+          <img className='w-8 h-8 mb-[87px]' src={closeBtn} onClick={handleClick} alt="" />
+        </li>
+        <li className='mb-8 sm:mb-0'>
+          <a className='hover:text-SoftRed sm:text-4' href="#">Home</a>
+        </li>
+        <li className='mb-8 sm:mb-0'>
+          <a className='hover:text-SoftRed' href="#">New</a>
+        </li>
+        <li className='mb-8 sm:mb-0'>
+          <a className='hover:text-SoftRed' href="#">Popular</a>
+        </li>
+        <li className='mb-8 sm:mb-0'>
+          <a className='hover:text-SoftRed' href="#">Trending</a>
+        </li>
+        <li className='mb-8 sm:mb-0'>
+          <a className='hover:text-SoftRed' href="#">Categories</a>
+        </li>
+      </ul>
+      <img className={`${menuClicked ? '' : 'hidden'} w-10 h-4 cursor-pointer sm:hidden`} src={menu} onClick={handleClick} alt="" />
     </>
   )
 }
